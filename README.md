@@ -1,3 +1,4 @@
+**✨ Important Update: 30/06/2025 - Just got back from a short break & will continue development on this app in the following days! ✨**
 **✨ Important Update: 11/06/2025 - Enhanced Portability & Local Model Caching! ✨**
 
 Perchance Revival has been updated for better model management!

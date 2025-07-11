@@ -47,7 +47,8 @@ STYLE_MODEL_MAP = {
     "Semi-Realistic": "stablediffusionapi/dreamshaper8",
     "MidJourney Style": "prompthero/openjourney-v4",
     "Ghibli Style": "danyloylo/sd1.5-ghibli-style",
-    "RealDream Style": "GraydientPlatformAPI/realdream11"
+    "RealDream Style": "GraydientPlatformAPI/realdream11",
+    "OmegaSunset/CyberRrealisticSD15_Diffusers"
 }
 
 DEFAULT_HUB_MODELS = [] # Keep empty as styles handle featured models

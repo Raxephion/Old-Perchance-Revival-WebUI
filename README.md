@@ -1,3 +1,5 @@
+**✨ Important Update: 11/07/2025 - New realistic model - CyberRealistic - added  ✨**
+
 **✨ Important Update: 30/06/2025 - Just got back from a short break & will continue development on this app in the following days! Some new models to be added as well  ✨**
 
 **✨ Important Update: 11/06/2025 - Enhanced Portability & Local Model Caching! ✨**

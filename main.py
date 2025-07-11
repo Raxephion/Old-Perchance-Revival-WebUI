@@ -74,14 +74,16 @@ current_model_id_loaded = None
 current_device_loaded = None
 
 # --- Helper function to list available local models ---
-def list_local_models(models_dir_param): # Renamed param
-    if not os.path.exists(models_dir_param):
-        os.makedirs(models_dir_param)
-        print(f"Created directory: {models_dir_param}")
-        return []
-    local_models = [os.path.join(models_dir_param, d) for d in os.listdir(models_dir_param)
-                    if os.path.isdir(os.path.join(models_dir_param, d))]
-    return local_models
+# NOTE: This function is currently disabled as per the user's request to only show
+# models from STYLE_MODEL_MAP to prevent duplicates in the dropdown.
+# def list_local_models(models_dir_param):
+#     if not os.path.exists(models_dir_param):
+#         os.makedirs(models_dir_param)
+#         print(f"Created directory: {models_dir_param}")
+#         return []
+#     local_models = [os.path.join(models_dir_param, d) for d in os.listdir(models_dir_param)
+#                     if os.path.isdir(os.path.join(models_dir_param, d))]
+#     return local_models
 
 # --- Image Generation Function ---
 def generate_image(model_input_name, selected_device_str, prompt, negative_prompt, steps, cfg_scale, scheduler_name, size, seed, num_images):
@@ -117,12 +119,11 @@ def generate_image(model_input_name, selected_device_str, prompt, negative_promp
     if model_input_name in STYLE_MODEL_MAP:
         actual_model_id_to_load = STYLE_MODEL_MAP[model_input_name]
         print(f"Selected style '{model_input_name}' maps to model: {actual_model_id_to_load}")
-    elif model_input_name.startswith("Local: "):
-        actual_model_id_to_load = model_input_name.replace("Local: ", "", 1)
-        print(f"Selected local model path: {actual_model_id_to_load}")
+    # The "Local: " logic is no longer needed since the dropdown only contains styles.
+    # The `else` block is kept as a fallback but should not be reached with the current UI setup.
     else:
         actual_model_id_to_load = model_input_name
-        print(f"Selected identifier '{model_input_name}' not a style or local path format, attempting to load as raw ID/path...")
+        print(f"Selected identifier '{model_input_name}' not a style, attempting to load as raw ID/path...")
 
     if not actual_model_id_to_load or actual_model_id_to_load == "No models found":
          raise gr.Error("Invalid model selection. Could not determine which model to load.")
@@ -166,7 +167,7 @@ def generate_image(model_input_name, selected_device_str, prompt, negative_promp
                      actual_model_id_to_load,
                      torch_dtype=dtype_to_use,
                      safety_checker=None,
-                     cache_dir=MODELS_DIR  # <--- THIS IS THE ADDED/MODIFIED LINE
+                     cache_dir=MODELS_DIR
                  )
 
             pipeline = pipeline.to(device_to_use)
@@ -340,11 +341,11 @@ def generate_image(model_input_name, selected_device_str, prompt, negative_promp
              raise gr.Error(f"Image generation failed: An unexpected error occurred. {e}")
 
 # --- Gradio Interface ---
-local_models_list = list_local_models(MODELS_DIR) # Use the renamed param for the function call
+# Per user request, the dropdown will only contain styles from STYLE_MODEL_MAP.
+# The functionality to auto-discover local models is disabled to prevent duplicates.
+# To add a model, add it to the STYLE_MODEL_MAP dictionary above.
 styled_models = list(STYLE_MODEL_MAP.keys())
-additional_local_model_names = [f"Local: {path}" for path in local_models_list] # Use the renamed list
-
-model_choices = styled_models + additional_local_model_names
+model_choices = styled_models
 
 if not model_choices:
     initial_model_choices = ["No models found"]
@@ -353,16 +354,11 @@ if not model_choices:
     print(f"\n--- IMPORTANT ---")
     print(f"No models available!")
     print(f"Please define Styles and their corresponding Hub models in STYLE_MODEL_MAP in main.py")
-    print(f"or place additional local diffusers models in '{os.path.abspath(MODELS_DIR)}'.") # Uses MODELS_DIR
     print(f"-----------------\n")
 else:
     initial_model_choices = model_choices
-    if styled_models:
-         initial_default_model = styled_models[0]
-    elif additional_local_model_names:
-         initial_default_model = additional_local_model_names[0]
-    else:
-         initial_default_model = model_choices[0]
+    # The default model will be the first one from the styles list.
+    initial_default_model = styled_models[0]
     model_dropdown_interactive = True
 
 scheduler_choices = list(SCHEDULER_MAP.keys())
@@ -377,7 +373,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         Note: this app is currently in early development - UI will be adjusted to match Perchance presets.
         Note: 'hire.fix' size option currently generates at 1024x1024.
         Have fun!
-        """ # Added note about MODELS_DIR
+        """
     )
 
     with gr.Row():
@@ -385,7 +381,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             model_dropdown = gr.Dropdown(
                 choices=initial_model_choices,
                 value=initial_default_model,
-                label=f"Select Style / Model (Featured Styles or Additional Local from ./{MODELS_DIR})", # Uses MODELS_DIR
+                label="Select Style", # Modified label
                 interactive=model_dropdown_interactive,
             )
             device_dropdown = gr.Dropdown(
@@ -465,7 +461,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         4. Click "Generate Image".
         5. Have fun!
         6. The first generation with a new Style/Model might take some time to load as the model is initially downloaded from the hub to your local `{MODELS_DIR}` folder.
-        """ # Uses MODELS_DIR
+        """
     )
 
 if __name__ == "__main__":
@@ -476,18 +472,15 @@ if __name__ == "__main__":
     print(f"{cuda_status} {gpu_count_str}")
     print(f"Available devices detected by PyTorch: {', '.join(AVAILABLE_DEVICES)}")
     print(f"Default device selected by app: {DEFAULT_DEVICE}")
-    # MODELS_DIR (which is "checkpoints") is used here
-    print(f"Models from Styles (if Hub IDs) and additional local models will be loaded from/cached to: {os.path.abspath(MODELS_DIR)}")
+    print(f"Models from Styles will be downloaded to/cached in: {os.path.abspath(MODELS_DIR)}")
 
     if not model_choices:
          print(f"\n!!! WARNING: No models available. The Gradio app will launch but cannot generate images.")
-         print(f"Please define Styles and their corresponding Hub models in STYLE_MODEL_MAP in main.py")
-         print(f"or add additional local diffusers models to '{MODELS_DIR}'. !!!") # Uses MODELS_DIR
+         print(f"Please define Styles and their corresponding Hub models in STYLE_MODEL_MAP in main.py !!!")
     else:
          num_styled = len(STYLE_MODEL_MAP)
-         num_additional_local = len(local_models_list) # Use the renamed list
          print(f"Defined {num_styled} featured style(s) mapping to Hub models.")
-         print(f"Found {num_additional_local} additional local model(s) in '{os.path.abspath(MODELS_DIR)}'.") # Uses MODELS_DIR
+         # The print statement for local models has been removed as that feature is disabled.
 
     print("Launching Gradio interface...")
     demo.launch(show_error=True, inbrowser=True)

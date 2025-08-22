@@ -2,18 +2,14 @@
 
 **✨ Important Update: 11/07/2025 - New realistic model - CyberRealistic - added  ✨**
 
-**✨ Important Update: 30/06/2025 - Just got back from a short break & will continue development on this app in the following days! Some new models to be added as well  ✨**
-
 **✨ Important Update: 11/06/2025 - Enhanced Portability & Local Model Caching! ✨**
-
-
-
-
 Perchance Revival has been updated for better model management!
 
 *   **Models Now Local:** All Hugging Face Hub models selected through this app will now be downloaded and cached into the `checkpoints` folder located directly within the Perchance Revival application directory.
 *   **Fully Portable:** This change makes the entire application, along with its models, self-contained and easily portable.
 *   **No Global Cache Usage:** The app will no longer use your main Hugging Face user cache directory (e.g., `~/.cache/huggingface` or `C:\Users\<username>\.cache\huggingface`) for models it downloads.
+
+  
 
 #### 11/06/2025 - email model suggestions to: raxephion@yahoo.com (models you think might have been used by perchance and/or models you'd like to see in the app)
 #### 11/06/2025 - Added 3 more models/presets for variety while perchance models are still being hunted down. Fixed update.bat - busy testing

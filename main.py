@@ -42,8 +42,8 @@ DEFAULT_SCHEDULER = "Euler"
 STYLE_MODEL_MAP = {
     "Drawn Anime": "Yntec/RevAnimatedV2Rebirth",
     "Mix Anime": "stablediffusionapi/realcartoon-anime-v11",
-    "Stylized Realism V1": "Raxephion/Typhoon-SD15-V1",
-    "Stylized Realism V2": "Raxephion/Typhoon-SD15-V2",
+    "Raxephion Typhoon V1": "Raxephion/Typhoon-SD15-V1",
+    "Raxephion Typhoon V2": "Raxephion/Typhoon-SD15-V2",
     "Realistic Humans": "stablediffusionapi/realistic-vision",
     "Semi-Realistic": "stablediffusionapi/dreamshaper8",
     "MidJourney Style": "prompthero/openjourney-v4",

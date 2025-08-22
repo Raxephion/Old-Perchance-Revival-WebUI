@@ -25,7 +25,7 @@ This is the biggest update yet, adding a whole new way to create!
     
 *   **Dedicated Hires. fix Section:** Upscale and add significant detail to your creations with a simple, dedicated dropdown menu in the Text-to-Image tab.
     
-*   **Increased Image Count:** You can now generate up to **9 images** in a single batch.
+*   **Increased Image Count:** You can now generate up to **12 images** in a single batch.
     
 *   **Lossless PNG Output:** Images now save in **PNG format** by default.
     

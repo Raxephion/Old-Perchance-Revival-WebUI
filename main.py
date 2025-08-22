@@ -55,8 +55,8 @@ STYLE_MODEL_MAP = {
 # --- Secondary Style Prompt Snippets ---
 SECONDARY_STYLE_MAP = {
 
-    "Oil Painting": "((((oil painting)))), (painterly)",
-    "Oil Painting on Canvas": "(((((oil painting on canvas)))), ((canvas)), (oil on canvas), (painterly)",
+    "Oil Painting": "(((in the style of oil painting))), (((painterly style)))",
+    "Oil Painting on Canvas": "(((style of oil paint style))), (((style of paint on canvas)))",
     "Oil Painting - Realism":"((((oil painting)))), (painterly), (((realistic humans)))",
     "MTG Card": "magic the gathering",
 

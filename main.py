@@ -5,7 +5,7 @@ Created on Wed Sep 18 2024
 @author: raxephion
 Perchance Revival - Recreating Old Perchance SD 1.5 Experience
 Basic Stable Diffusion 1.5 Gradio App with local/Hub models and CPU/GPU selection
-Added multi-image generation, Hires. fix, and Image-to-Image capabilities.
+Added multi-image generation, Hires. fix, Image-to-Image, and Secondary Styles.
 Models from STYLE_MODEL_MAP (if Hub IDs) will now be downloaded to MODELS_DIR.
 
 NOTE: App still in early development - UI will be adjusted to match Perchance presets
@@ -49,6 +49,25 @@ STYLE_MODEL_MAP = {
     "Ghibli Style": "danyloylo/sd1.5-ghibli-style",
     "RealDream Style": "GraydientPlatformAPI/realdream11",
     "CyberRealistic" : "OmegaSunset/CyberRrealisticSD15_Diffusers"
+}
+
+# --- NEW: Secondary Style Prompt Snippets ---
+SECONDARY_STYLE_MAP = {
+    "Painted Anime":"(((painted anime)))",
+    "Casual Photo":"((((casual selfie)))), ((((casual photo)))), ((((photorealism))))",
+    "Realistic Humans":"((((realism)))), ((((photorealism)))), ((((ultra detailed)))), ((((lifelike)))), in soft gaze, looking straight at the camera, skin blemishes, imperfect skin, skin pores, no makeup, no cosmetics, matured, solo, centered, RAW photo, detailed, clear features, sharp focus, film grain, 8k uhd, candid portrait, natural lighting",
+    "Jester":"(((jester laughing maniacally anime art style))) (((jester anime art style))) (((pointy jester hat anime art style))) (((yugioh anime art style))) (((neon colors))) (((vibrant colors))) (((bright colors))) (((lens flare))) (((light leaks))) (((long exposure)))",
+    "Ninja": "(((( one character, ninja gaiden anime art style, ninja scroll anime art style, martial arts anime art style, 3D anime art style, heavy outlines art style, light leaks, lens flare, long exposure))))",
+    "Final Fantasy": "(Final Fantasy Art Style:1.3), (CGI Video Game Art Style:1.3), (3D Video Game Art Style:1.3), (light leaks:1.1), (lens flare:1.1)",
+    "Star Wars Character": "(((one character:1.5))),(Star Wars Art Style:1.3), (Animated Star Wars Art style:1.3), (Star Wars Anime Art style:1.3), (Anime Art style:1.3), (bright color grading:1.2), (vibrant color grading:1.2), (light leaks), (lens flare)",
+    "Dragonball":" (Dragonball Anime Art Style:1.1), (YuGiOh art style:1.3), (bright color grading:1.2), (vibrant color grading:1.2), (light leaks), (lens flare)",
+    "Neko (Catgirl)": "(((one character:1.5))), (human catgirl with a cat tail anime art style:1.3), (waifu anime art style:1.3), (gorgeous anime art style:1.3), (yugioh art style:1.3), (2d disney character art style:1.1), (catgirl anime art style:1.3), (neko anime art style:1.3), (vibrant color grading:1.6), (bright color grading:1.6), adult female catgirl, perfect body, {dark|light|medium} skin complexion, pretty lips, pretty eyes, light makeup, ({character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld} shot}:1.3)",
+    "American Girl": "(((one character:1.5))), (perfect gorgeous anime art style:1.3), (yugioh art style:1.3), (2d disney character art style:1.3), (gen13 comic art style), (stormwatch comic art style), tall adult female in her early 20s, perfect body, {dark|light|medium} skin complexion, smooth skin, american face, pretty lips, pretty eyes, light makeup, wearing {jeans|short shorts|a revealing outfit|a skin-tight bodysuit|a punk rock outfit|a steampunk outfit|a college cheerleader uniform|a skater girl outfit|a swimsuit|a bikini|underwear and a t-shirt with no bra|fancy underwear|a minidress with stockings|a miniskirt with stockings|leggings}:1.2, (view from {the front|behind}), ({character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld} shot}:1.3)",
+    "Random Girl 1": " one character, female in her early 20s, {dark|light|medium} skin complexion, smooth skin, american face, {dark|light|medium} {blue|green|gray|hazel|brown} eyes, pretty lips, pretty eyes, light makeup, abstract halftone background, thick border around image, vibrant colors, bright colors, high contrast, {amazingly beautiful|embodiment of perfection|stunningly gorgeous} girl anime art style",
+    "Random Girl 2": "one character, female in her early 20s, {dark|light|medium} skin complexion, smooth skin, american face, {dark|light|medium} {blue|green|gray|hazel|brown} eyes, pretty lips, pretty eyes, light makeup, wearing {jeans|short shorts|a revealing outfit|a skin-tight bodysuit|a punk rock outfit|a steampunk outfit|a college cheerleader uniform|a skater girl outfit|a swimsuit|a bikini|underwear and a t-shirt|fancy underwear|a minidress with stockings|a miniskirt with stockings|leggings}, view from {the front|behind, rear projection}, {character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld|pov} shot|pov shot}, abstract halftone background, thick border around image, vibrant colors, bright colors, high contrast, {amazingly beautiful|embodiment of perfection|stunningly gorgeous} girl anime art style",
+    "Lego": "(legos art style:1.3), (lego video game art style:1.3)",
+    "Oil Painting": "((((oil painting)))), ((((painterly))))",
+    "Drawn Anime": "((((hand drawn anime)))), ((((illustration))))"
 }
 
 DEFAULT_HUB_MODELS = [] # Keep empty as styles handle featured models
@@ -108,10 +127,17 @@ def load_model(model_input_name, selected_device_str):
     return device_to_use
 
 # --- Text-to-Image Generation Function ---
-def generate_image_from_text(model_input_name, selected_device_str, prompt, negative_prompt, steps, cfg_scale, scheduler_name, size, seed, num_images,
+def generate_image_from_text(model_input_name, selected_device_str, secondary_style_name, prompt, negative_prompt, steps, cfg_scale, scheduler_name, size, seed, num_images,
                    hires_fix_enable, denoising_strength, upscale_by):
     if not prompt:
         raise gr.Error("Please enter a prompt.")
+
+    # --- Append secondary style if selected ---
+    if secondary_style_name and secondary_style_name != "None":
+        style_prompt = SECONDARY_STYLE_MAP.get(secondary_style_name, "")
+        if style_prompt:
+            prompt = f"{prompt}, {style_prompt}"
+            print(f"Appended secondary style '{secondary_style_name}'.")
 
     device_to_use = load_model(model_input_name, selected_device_str)
     
@@ -166,9 +192,16 @@ def generate_image_from_text(model_input_name, selected_device_str, prompt, nega
         raise gr.Error(f"An error occurred during generation: {e}")
 
 # --- Image-to-Image Generation Function ---
-def generate_image_from_image(model_input_name, selected_device_str, input_image, prompt, negative_prompt, strength, steps, cfg_scale, scheduler_name, seed, num_images):
+def generate_image_from_image(model_input_name, selected_device_str, secondary_style_name, input_image, prompt, negative_prompt, strength, steps, cfg_scale, scheduler_name, seed, num_images):
     if input_image is None:
         raise gr.Error("Please upload an input image for Image-to-Image generation.")
+
+    # --- Append secondary style if selected ---
+    if secondary_style_name and secondary_style_name != "None":
+        style_prompt = SECONDARY_STYLE_MAP.get(secondary_style_name, "")
+        if style_prompt:
+            prompt = f"{prompt}, {style_prompt}"
+            print(f"Appended secondary style '{secondary_style_name}'.")
 
     device_to_use = load_model(model_input_name, selected_device_str)
     
@@ -229,6 +262,7 @@ styled_models = list(STYLE_MODEL_MAP.keys())
 model_choices = styled_models if styled_models else ["No models found"]
 initial_default_model = model_choices[0]
 scheduler_choices = list(SCHEDULER_MAP.keys())
+secondary_style_choices = ["None"] + list(SECONDARY_STYLE_MAP.keys()) # Choices for the new dropdown
 
 with gr.Blocks(css=cyberpunk_css) as demo:
     gr.Markdown("# Perchance Revival", elem_id="main_title")
@@ -237,11 +271,16 @@ with gr.Blocks(css=cyberpunk_css) as demo:
     with gr.Row():
         model_dropdown = gr.Dropdown(
             choices=model_choices, value=initial_default_model, label="Select Style",
-            interactive=bool(styled_models)
+            interactive=bool(styled_models), scale=3
+        )
+        # --- NEW Secondary Style Dropdown ---
+        secondary_style_dropdown = gr.Dropdown(
+            choices=secondary_style_choices, value="None", label="Secondary Style (optional)",
+            interactive=True, scale=2
         )
         device_dropdown = gr.Dropdown(
             choices=AVAILABLE_DEVICES, value=DEFAULT_DEVICE, label="Processing Device",
-            interactive=len(AVAILABLE_DEVICES) > 1
+            interactive=len(AVAILABLE_DEVICES) > 1, scale=1
         )
 
     with gr.Tabs():
@@ -251,7 +290,7 @@ with gr.Blocks(css=cyberpunk_css) as demo:
                 with gr.Column(scale=2):
                     prompt_input = gr.Textbox(label="Positive Prompt", placeholder="Enter your prompt...", lines=3)
                     negative_prompt_input = gr.Textbox(label="Negative Prompt", placeholder="e.g. blurry, bad quality...", lines=2)
-                    generate_button_txt2img = gr.Button("✨ Generate from Text ✨", variant="primary")
+                    generate_button_txt2img = gr.Button("Generate", variant="primary")
 
                     with gr.Accordion("Advanced Settings", open=False):
                         steps_slider = gr.Slider(minimum=5, maximum=150, value=30, label="Inference Steps", step=1)
@@ -279,7 +318,7 @@ with gr.Blocks(css=cyberpunk_css) as demo:
 
                     prompt_input_img2img = gr.Textbox(label="Positive Prompt", placeholder="Describe what you want to see...", lines=3)
                     negative_prompt_input_img2img = gr.Textbox(label="Negative Prompt", placeholder="e.g. blurry, bad quality...", lines=2)
-                    generate_button_img2img = gr.Button("✨ Generate from Image ✨", variant="primary")
+                    generate_button_img2img = gr.Button(" Generate from Image ", variant="primary")
 
                     with gr.Accordion("Advanced Settings", open=False):
                         steps_slider_img2img = gr.Slider(minimum=5, maximum=150, value=30, label="Inference Steps", step=1)
@@ -296,7 +335,7 @@ with gr.Blocks(css=cyberpunk_css) as demo:
     generate_button_txt2img.click(
         fn=generate_image_from_text,
         inputs=[
-            model_dropdown, device_dropdown, prompt_input, negative_prompt_input,
+            model_dropdown, device_dropdown, secondary_style_dropdown, prompt_input, negative_prompt_input,
             steps_slider, cfg_slider, scheduler_dropdown, size_dropdown,
             seed_input, num_images_slider,
             hires_fix_enable_checkbox, denoising_strength_slider, upscale_by_slider
@@ -307,7 +346,7 @@ with gr.Blocks(css=cyberpunk_css) as demo:
     generate_button_img2img.click(
         fn=generate_image_from_image,
         inputs=[
-            model_dropdown, device_dropdown, input_image_img2img, prompt_input_img2img, 
+            model_dropdown, device_dropdown, secondary_style_dropdown, input_image_img2img, prompt_input_img2img, 
             negative_prompt_input_img2img, strength_slider_img2img, steps_slider_img2img, 
             cfg_slider_img2img, scheduler_dropdown_img2img, seed_input_img2img, 
             num_images_slider_img2img

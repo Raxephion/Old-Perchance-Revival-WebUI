@@ -46,7 +46,7 @@ This is the biggest update yet, adding a whole new way to create!
 *   **Email model suggestions to:** [_raxephion@yahoo.com_](https://www.google.com/url?sa=E&q=mailto:raxephion@yahoo.com).
     
 
-> ⚠️ **Early Development Notice**This app is still in **very early development**. It can already generate images successfully, but expect bugs and future changes.
+> ⚠️ **beta release notice ** 
 
 How to Use the Image-to-Image (img2img) Tab
 -------------------------------------------

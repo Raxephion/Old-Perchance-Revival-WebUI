@@ -259,7 +259,7 @@ with gr.Blocks(css=cyberpunk_css) as demo:
                         scheduler_dropdown = gr.Dropdown(choices=scheduler_choices, value=DEFAULT_SCHEDULER, label="Scheduler")
                         size_dropdown = gr.Dropdown(choices=SUPPORTED_SD15_SIZES, value="512x768", label="Image Size")
                         seed_input = gr.Number(label="Seed (-1 for random)", value=-1, precision=0)
-                        num_images_slider = gr.Slider(minimum=1, maximum=9, value=1, step=1, label="Number of Images")
+                        num_images_slider = gr.Slider(minimum=1, maximum=12, value=1, step=1, label="Number of Images")
 
                     with gr.Accordion("Hires. fix", open=False):
                         hires_fix_enable_checkbox = gr.Checkbox(label="Enable Hires. fix", value=False)

@@ -1,11 +1,3 @@
-**✨ Important Update: 01/08/2025 - Managed to track down more perchance models, presets and system prompts. After being emailed by people using this app, and seeing there actually IS interest, I will up the momentum again with this. Pity about the toxicity on Reddit, but as long as the interest remains, this shall remain in active development ✨**
-
-**✨ Important Update: 11/07/2025 - New realistic model - CyberRealistic - added  ✨**
-
-**✨ Important Update: 30/06/2025 - Just got back from a short break & will continue development on this app in the following days! Some new models to be added as well  ✨**
-
-**✨ Important Update: 11/06/2025 - Enhanced Portability & Local Model Caching! ✨**
-
 Perchance Revival has been updated for better model management!
 
 *   **Models Now Local:** All Hugging Face Hub models selected through this app will now be downloaded and cached into the `checkpoints` folder located directly within the Perchance Revival application directory.
@@ -18,6 +10,14 @@ Perchance Revival has been updated for better model management!
 > ⚠️ **Early Development Notice**  
 > This app is still in **very early development**. It can already generate images successfully, but expect bugs, missing polish, and future changes (including some big ones). It’s functional but **not production-ready yet**. Stability is good so far, but this is more of an early preview than a final release.
 
+
+**✨ Important Update: 01/08/2025 - Managed to track down more perchance models, presets and system prompts. After being emailed by people using this app, and seeing there actually IS interest, I will up the momentum again with this. Pity about the toxicity on Reddit, but as long as the interest remains, this shall remain in active development ✨**
+
+**✨ Important Update: 11/07/2025 - New realistic model - CyberRealistic - added  ✨**
+
+**✨ Important Update: 30/06/2025 - Just got back from a short break & will continue development on this app in the following days! Some new models to be added as well  ✨**
+
+**✨ Important Update: 11/06/2025 - Enhanced Portability & Local Model Caching! ✨**
 
 
 # Perchance Revival - Easy Local SD 1.5 Image Generation

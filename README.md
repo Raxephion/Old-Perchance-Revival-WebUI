@@ -1,173 +1,189 @@
-**✨ MAJOR Update: 22/08/2025 - Images rendered as .PNG, Deicated Hires fix section, denoise strength and upscale factor added, max images increased to 9, adding more models. ✨**
+Perchance Revival - Easy Local SD 1.5 Image Generation
+======================================================
 
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   ![alt text](https://img.shields.io/badge/python-3.8+-blue.svg)   `
 
-**✨ Important Update: 01/08/2025 - Managed to track down more perchance models, presets and system prompts. After being emailed by people using this app, and seeing there actually IS interest, I will up the momentum again with this. Pity about the toxicity on Reddit, but as long as the interest remains, this shall remain in active development ✨**
+Welcome to **Perchance Revival**! This is a user-friendly Gradio web application designed to bring back the experience of the old Perchance image generator by featuring the specific Stable Diffusion 1.5 models and common generation parameters/presets it used.
 
-**✨ Important Update: 11/07/2025 - New realistic model - CyberRealistic - added  ✨**
+Generate images effortlessly and for free, directly on your own PC. This version is designed to **prioritize and utilize your NVIDIA GPU** for significantly faster generation if you have one, while still offering a CPU option for broader compatibility. The goal is to make local SD 1.5 generation as simple as possible, especially for those familiar with the old Perchance site.
 
-**✨ Important Update: 11/06/2025 - Enhanced Portability & Local Model Caching! ✨**
-Perchance Revival has been updated for better model management!
+Application Screenshot:
+-----------------------
 
-*   **Models Now Local:** All Hugging Face Hub models selected through this app will now be downloaded and cached into the `checkpoints` folder located directly within the Perchance Revival application directory.
-*   **Fully Portable:** This change makes the entire application, along with its models, self-contained and easily portable.
-*   **No Global Cache Usage:** The app will no longer use your main Hugging Face user cache directory (e.g., `~/.cache/huggingface` or `C:\Users\<username>\.cache\huggingface`) for models it downloads.
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   ![alt text](app-images/revival001.png)   `
 
-  
+This project is primarily designed for **Windows** users, offering a straightforward setup with easy-to-use batch files. Manual setup options are also provided for other platforms or advanced users.
 
-#### 11/06/2025 - email model suggestions to: raxephion@yahoo.com (models you think might have been used by perchance and/or models you'd like to see in the app)
-#### 11/06/2025 - Added 3 more models/presets for variety while perchance models are still being hunted down. Fixed update.bat - busy testing
+✨ What's New in This Version?
+-----------------------------
 
-> ⚠️ **Early Development Notice**  
-> This app is still in **very early development**. It can already generate images successfully, but expect bugs, missing polish, and future changes (including some big ones). It’s functional but **not production-ready yet**. Stability is good so far, but this is more of an early preview than a final release.
+This latest release focuses on adding powerful new features and improving your quality of life!
 
+*   **Dedicated Hires. fix Section:** The most exciting new feature! You can now upscale and add significant detail to your creations with a simple, dedicated dropdown menu. (See the full guide on how to use it below!)
+    
+*   **Increased Image Count:** You can now generate up to **9 images** in a single batch, making it easier to find that perfect result.
+    
+*   **Lossless PNG Output:** Images now save in **PNG format** by default for the best possible quality, with no compression artifacts.
+    
+*   **UI/UX Improvements:** The 'Generate' button has been moved to a more logical spot, right below the prompts, so you can access it without scrolling. The image gallery thumbnails are also smaller, allowing you to see more of your creations at once without cluttering the screen.
+    
 
+#### Previous Updates
 
+*   **✨ 01/08/2025:** Managed to track down more perchance models, presets and system prompts. After being emailed by people using this app, and seeing there actually IS interest, I will up the momentum again with this. Pity about the toxicity on Reddit, but as long as the interest remains, this shall remain in active development.
+    
+*   **✨ 11/07/2025:** New realistic model - **CyberRealistic** - added.
+    
+*   **✨ 11/06/2025:** Enhanced Portability & Local Model Caching! All models are now downloaded and cached into the local checkpoints folder, making the app fully portable.
+    
+*   **Email model suggestions to:** [_raxephion@yahoo.com_](https://www.google.com/url?sa=E&q=mailto:raxephion@yahoo.com) (models you think might have been used by perchance and/or models you'd like to see in the app).
+    
 
+> ⚠️ **Early Development Notice**This app is still in **very early development**. It can already generate images successfully, but expect bugs, missing polish, and future changes. It’s functional but **not production-ready yet**.
 
-# Perchance Revival - Easy Local SD 1.5 Image Generation
+How to Use the New Hires. fix Feature
+-------------------------------------
 
-[![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Standard AI images can sometimes look a bit soft or lack fine detail at their base size (like 512x768). **Hires. fix** is a powerful feature that solves this by performing a two-step process to create larger, more detailed final images.
 
-Welcome to **Perchance Revival**! This is a user-friendly Gradio web application designed to bring back the experience of the old Perchance image generator by featuring the specific Stable Diffusion 1.5 models and common generation parameters/presets it used.
+1.  It generates your image at the normal, smaller size you selected.
+    
+2.  It then intelligently enlarges that image and **paints over it** with more detail, using your original prompt as a guide.
+    
 
-Generate images effortlessly and for free, directly on your own PC. This version is designed to **prioritize and utilize your NVIDIA GPU** for significantly faster generation if you have one, while still offering a CPU option for broader compatibility. The goal is to make local SD 1.5 generation as simple as possible, especially for those familiar with the old Perchance site.
+The result is a high-resolution image that retains the composition you liked from the smaller version.
 
-## Application Screenshot:
-![Screenshot of the Perchance Revival UI](app-images/revival001.png)
+#### Simple Steps to Use Hires. fix:
 
+1.  **Generate Your Base Image First:** Write your prompt and set your normal settings (steps, CFG, size) as you usually would. It's often a good idea to find a seed you like _before_ enabling Hires. fix. This saves you from wasting time upscaling an image you don't like.
+    
+2.  **Open the 'Hires. fix' Menu:** Click on the dropdown menu labeled **'Hires. fix'** located below the Advanced Settings.
+    
+3.  **Enable It:** Tick the **'Enable Hires. fix'** checkbox.
+    
+4.  **Configure the Settings:**
+    
+    *   **Upscale by:** This slider controls how much bigger the final image will be. A value of _1.5_ will make a 512x512 image into a 768x768 image. A value of _2.0_ will double it to 1024x1024.
+        
+    *   **Denoising strength:** Think of this as a "creativity vs. faithfulness" slider for the second step.
+        
+        *   A **lower value** (e.g., _0.5_) will stick very closely to your original image's composition and colors, just adding finer detail.
+            
+        *   A **higher value** (e.g., _0.75_) gives the AI more freedom to change things and add new elements while it adds detail. This can sometimes lead to better results, but may also alter your image more than you want. A good starting point is usually around **0.6-0.7**.
+            
+5.  **Click Generate!** Your PC will now perform both steps. Be patient, as this will take longer than a normal generation.
+    
 
-This project is primarily designed for **Windows** users, offering a straightforward setup with easy-to-use batch files. Manual setup options are also provided for other platforms or advanced users.
+> **Important Note:** Hires. fix uses more of your computer's resources (VRAM) and takes longer because it's essentially doing twice the work. If you get an 'Out of Memory' error, try using a smaller 'Upscale by' value.
 
+✨ Features
+----------
 
-## ✨ Features
+*   **Device Agnostic:**
+    
+    *   Run inference on your **CPU**.
+        
+    *   Leverage your **NVIDIA GPU** for significantly faster generation.
+        
+*   **Comprehensive Control:**
+    
+    *   **Positive & Negative Prompts:** Guide the AI with detailed descriptions.
+        
+    *   **Inference Steps & CFG Scale:** Control image generation quality and prompt adherence.
+        
+    *   **Schedulers:** Experiment with different sampling algorithms (Euler, DPM++ 2M, DDPM, LMS).
+        
+    *   **Image Sizes:** Choose from standard SD1.5 resolutions.
+        
+    *   **Seed Control:** Set a specific seed for reproducible results or use -1 for a random one.
+        
+*   **User-Friendly Interface:**
+    
+    *   Clean and intuitive Gradio UI with organized controls.
+        
+    *   Direct image display with download and share options.
+        
+*   **Safety First (Note):** The built-in safety checker is **disabled** to allow for maximum creative freedom. Please use responsibly.
+    
 
-- **Device Agnostic:**
-  - Run inference on your **CPU**. (inference time around 4:55 with 10th gen i5 — not bad for an oven).
-  - Leverage your **NVIDIA GPU** for significantly faster generation (Euler 30 steps = 8 secs with 6GB VRAM). CUDA magic required.
-- **Comprehensive Control:**
-  - **Positive & Negative Prompts:** Guide the AI with detailed descriptions of what you want (and don’t want).
-  - **Inference Steps:** Control the number of denoising steps, because 20 just doesn’t feel lucky enough sometimes.
-  - **CFG Scale:** Adjust how strongly the image should conform to your prompt — or not. Live a little.
-  - **Schedulers:** Experiment with different sampling algorithms (Euler, DPM++ 2M, DDPM, LMS) until you find your personal flavor of chaos.
-  - **Image Sizes:** Choose from standard SD1.5 resolutions, plus a "hire.fix" option (interpreted as 1024x1024 because that's what people usually mean anyway).
-  - **Seed Control:** Set a specific seed for reproducible results. Or use -1 and see what the universe decides.
-- **User-Friendly Interface:**
-  - Clean and intuitive Gradio UI.
-  - Organized controls with advanced settings tucked away neatly — like secrets.
-  - Direct image display with download and share options.
-- **Safety First (Note):** The built-in safety checker is **disabled** in this version to allow for maximum creative freedom. Use responsibly. (We see you.)
+🚀 Prerequisites
+----------------
 
-## 🚀 Prerequisites
-- **Windows Operating System:** The provided batch files (`.bat`) are for Windows. For other operating systems, follow the manual setup steps below (warning: includes actual typing).
-- **Python:** 3.8 or higher. Ensure Python is installed and added to your system's PATH (usually an option during installation). You can download Python from [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/).
-- **Git:** (Required for manual setup and updating) For cloning the repository.
-- **Hardware:**
-  - A modern CPU is required.
-  - For GPU acceleration (optional but highly recommended for speed), a compatible NVIDIA GPU with up-to-date CUDA drivers. At least 6–8GB VRAM is recommended for 512x512 generation, more for larger sizes.
-  - **Important:** The correct CUDA version for your drivers is critical. Use `nvidia-smi` in the command prompt to check your driver's compatible CUDA version. Or guess wildly — up to you.
-- **Internet Connection:** Required for downloading models from Hugging Face Hub and for updates. Sorry, it doesn't generate dreams offline (yet).
+*   **Windows Operating System:** The provided batch files (.bat) are for Windows.
+    
+*   **Python:** 3.8 or higher. You can download it from _python.org_.
+    
+*   **Hardware:**
+    
+    *   A modern CPU.
+        
+    *   For GPU speed, a compatible **NVIDIA GPU** with up-to-date CUDA drivers. At least **6–8GB VRAM** is recommended.
+        
+*   **Internet Connection:** Required for the initial download of models.
+    
 
-## 📦 Easy Setup (Windows - Download & Run)
+📦 Easy Setup (Windows - Download & Run)
+----------------------------------------
 
 This is the recommended and easiest method for most Windows users.
 
 1.  **Download the project:**
-    *   Go to the GitHub repository page: `https://github.com/Raxephion/Old-Perchance-Revival-WebUI`
-    *   Click the green "<> Code" button.
-    *   Click "Download ZIP".
-2.  **Extract the ZIP:** Extract the downloaded ZIP file to a location on your computer (e.g., your Documents folder or Desktop). This will create a folder like `Old-Perchance-Revival-WebUI-main` (or similar). You can rename it if you prefer, for example, to `PerchanceRevival`.
-3. **Choose Your Setup Script:**
-   - **For CPU Inference:** Run `setup-CPU.bat`. This will install the CPU version of PyTorch.
-   - **For GPU Inference:** Run `setup-GPU.bat`. This will attempt to install the CUDA-enabled version of PyTorch.
-4. **Run the Setup Script:**
-   - Navigate into the extracted folder.
-   - **Double-click either `setup-CPU.bat` or `setup-GPU.bat`** depending on whether you want CPU or GPU inference.
-   - A command prompt window will open. Follow the instructions in the window. This script will create a Python virtual environment (`venv`), install all necessary core dependencies, and install the appropriate version of PyTorch.
-   - **Important:** Read the output in the command prompt carefully during and after the script finishes.
-     - **If using `setup-GPU.bat` and the CUDA installation fails:** The script will provide instructions on how to troubleshoot the CUDA installation or how to install the CPU version of PyTorch as a fallback. There's no shame in going back to CPU. Okay, maybe a little.
+    
+    *   Go to the GitHub repository page.
+        
+    *   Click the green **< > Code** button and select **"Download ZIP"**.
+        
+2.  **Extract the ZIP:** Extract the file to a location on your computer (e.g., your Desktop).
+    
+3.  **Choose Your Setup Script:**
+    
+    *   For **CPU** Inference: Run _setup-CPU.bat_.
+        
+    *   For **GPU** Inference: Run _setup-GPU.bat_.
+        
+4.  **Run the Setup Script:**
+    
+    *   **Double-click the script you chose**. A command prompt window will open and automatically install everything you need. Please be patient, as this can take some time.
+        
 
+🔄 Updating the Application (Windows - Easy Method)
+---------------------------------------------------
 
-## 🔄 Updating the Application (Windows - Easy Method)
-To get the latest code, dependency updates and updated models from this repository after using the easy setup:
-- Navigate to the project folder.
-- Double-click `update.bat` to run it.
-- A command prompt window will open and pull the latest changes from the GitHub repository and upgrade the Python packages in your virtual environment. Congratulations, you are now slightly more modern.
+To get the latest features, simply double-click **update.bat** in the project folder. It will automatically download the latest changes for you.
 
+▶️ Running the Application (Windows - Easy Method)
+--------------------------------------------------
 
-## ▶️ Running the Application (Windows - Easy Method)
+Once setup is complete, just double-click the **run.bat** file. A command prompt will appear, and a browser window should automatically open with the app. If not, open the URL shown in the console (usually _http://127.0.0.1:7860_).
 
-Once the setup is complete (including successful PyTorch installation, whether GPU or CPU), launch the Gradio web UI by double-clicking the `run.bat` file in your project folder (e.g., `PerchanceRevival`).
+⚙️ Manual Setup (For Linux/macOS or Advanced Users)
+---------------------------------------------------
 
-*   A command prompt window will open, activate the environment, and start the application.
-*   A browser window should automatically open to the application (or a local URL will be provided in the console, usually `http://127.0.0.1:7860`).
+If you are not on Windows or prefer a manual approach:
 
+1.  **Clone the Repository:**Open your terminal, navigate to where you want the project, and run the command: _git clone https://github.com/Raxephion/Old-Perchance-Revival-WebUI.git_. Then, navigate into the new folder with: _cd Old-Perchance-Revival-WebUI_.
+    
+2.  **Create and Activate a Virtual Environment:**First, run _python -m venv venv_.To activate it on Windows, run _venv\\Scripts\\activate_. On Linux/macOS, run _source venv/bin/activate_.
+    
+3.  **Install Dependencies:**Run the command: _pip install -r requirements.txt_.
+    
+4.  **Install PyTorch:** Find the correct command for your specific system (CPU or a certain CUDA version) at the official **PyTorch website**.
+    
+5.  **Run the Application:**With your virtual environment still active, run: _python main.py_.
+    
 
----
+⚙️ Uninstall:
+-------------
 
-## ⚙️ Manual Setup (Windows - Git Clone)
+*   Simply **delete the project folder**. This app is completely portable and doesn't install anything outside its own directory.
+    
 
-This method is for Windows users who are comfortable with Git.
+📄 License
+----------
 
-1.  **Clone the Repository:** Open Command Prompt or PowerShell, navigate to where you want to download the project, and run:
-    ```bash
-    git clone https://github.com/Raxephion/Old-Perchance-Revival-WebUI.git
-    cd Old-Perchance-Revival-WebUI
-    ```
-    *(Note: You can rename the `Old-Perchance-Revival-WebUI` directory after cloning if you prefer.)*
-2.  **Proceed with Batch Files:** Continue by following **Step 2 (Run the Setup Script)**, **Step 4 (Prepare Additional Local Models)** (for your *own* checkpoints), **Running**, and **Updating** instructions from the **📦 Easy Setup (Windows - Download & Run)** section above. Make sure the `images` folder exists and contains `ciphercore01.png` if you use this method and they aren't already in the cloned repo.
+This project is licensed under the MIT License - see the **LICENSE** file for details.
 
-## 🛠️ Manual Setup, Running & Updating (For Linux/macOS or Advanced Users)
+Support:
+--------
 
-If you are not on Windows or prefer a manual command-line approach:
-
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/Raxephion/Old-Perchance-Revival-WebUI.git
-    cd Old-Perchance-Revival-WebUI
-    ```
-2.  **Create and Activate a Virtual Environment:**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
-3.  **Install Dependencies (including PyTorch):**
-    *   Install core dependencies:
-        ```bash
-        pip install -r requirements.txt
-        ```
-    *   Install PyTorch: **This step is crucial and depends on your hardware.**
-        *   **For NVIDIA GPU with CUDA (Recommended for speed):** Find the appropriate command for your CUDA version on the PyTorch website: [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/). Example for CUDA 12.1:
-            ```bash
-            pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-            ```
-        *   **For CPU ONLY (if no NVIDIA GPU or CUDA fails):**
-            ```bash
-            pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-            ```
-4.  **Prepare Additional Local Models (Optional):** Follow Step 4 from the **📦 Easy Setup (Windows - Download & Run)** section above (the part about the `checkpoints` folder for *your own* models).
-5.  **Run the Application:**
-    ```bash
-    python main.py
-    ```
-    Ensure your virtual environment is activated (`source venv/bin/activate`) before running this command.
-6.  **Updating Manually:**
-    *   Navigate to the project directory in your terminal (`cd Old-Perchance-Revival-WebUI`).
-    *   Ensure your virtual environment is activated (`source venv/bin/activate`).
-    *   Pull the latest code: `git pull`
-    *   Update dependencies (excluding PyTorch unless you change the `requirements.txt` or manually upgrade): `pip install -r requirements.txt --upgrade`
-    *   Deactivate the environment: `deactivate`
-
-## ⚙️ Uninstall:
-
-1.  **Delete the main directory (folder) - this app is completely portable.**
-
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) file for details.
-
-
-## Support:
-
-Feel free to buy me a coffee ;) https://ko-fi.com/raxephion
+Feel free to buy me a coffee ;) [_https://ko-fi.com/raxephion_](https://www.google.com/url?sa=E&q=https://ko-fi.com/raxephion)

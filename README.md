@@ -1,7 +1,8 @@
 Perchance Revival - Easy Local SD 1.5 Image Generation
 ======================================================
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   ![alt text](https://img.shields.io/badge/python-3.8+-blue.svg)   `
+Plain 
+![alt text](https://img.shields.io/badge/python-3.8+-blue.svg)   `
 
 Welcome to **Perchance Revival**! This is a user-friendly Gradio web application designed to bring back the experience of the old Perchance image generator by featuring the specific Stable Diffusion 1.5 models and common generation parameters/presets it used.
 

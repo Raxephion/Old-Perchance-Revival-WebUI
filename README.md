@@ -1,3 +1,6 @@
+**✨ MAJOR Update: 22/08/2025 - Images rendered as .PNG, Deicated Hires fix section, denoise strength and upscale factor added, max images increased to 9, adding more models. ✨**
+
+
 **✨ Important Update: 01/08/2025 - Managed to track down more perchance models, presets and system prompts. After being emailed by people using this app, and seeing there actually IS interest, I will up the momentum again with this. Pity about the toxicity on Reddit, but as long as the interest remains, this shall remain in active development ✨**
 
 **✨ Important Update: 11/07/2025 - New realistic model - CyberRealistic - added  ✨**

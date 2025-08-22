@@ -8,7 +8,7 @@ Basic Stable Diffusion 1.5 Gradio App with local/Hub models and CPU/GPU selectio
 Added multi-image generation, Hires. fix, Image-to-Image, and Secondary Styles with Perchance syntax parsing.
 Models from STYLE_MODEL_MAP (if Hub IDs) will now be downloaded to MODELS_DIR.
 
-NOTE: App still in early development - UI will be adjusted to match Perchance presets
+NOTE: App still in ealy development - UI will be adjusted to match Perchance presets
 """
 
 import gradio as gr
@@ -60,7 +60,7 @@ SECONDARY_STYLE_MAP = {
 
 "Realistic humans": "high quality image, 4k, 8k, HD, UHD",
 
-"𝗡𝗼 𝘀𝘁𝘆𝗹𝗲": "",
+"No Style": "",
 
 "Anti-NSFW": "SFW",
 
@@ -99,13 +99,13 @@ SECONDARY_STYLE_MAP = {
 
 "American Girl": "(((one character:1.5))), (perfect gorgeous anime art style:1.3), (yugioh art style:1.3), (2d disney character art style:1.3), (gen13 comic art style), (stormwatch comic art style), tall adult female in her early 20s, perfect body, {dark|light|medium} skin complexion, smooth skin, american face, pretty lips, pretty eyes, light makeup, wearing {jeans|short shorts|a revealing outfit|a skin-tight bodysuit|a punk rock outfit|a steampunk outfit|a college cheerleader uniform|a skater girl outfit|a swimsuit|a bikini|underwear and a t-shirt with no bra|fancy underwear|a minidress with stockings|a miniskirt with stockings|leggings}:1.2, (view from {the front|behind}), ({character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld} shot}:1.3)",
 
-"𝐍𝐒𝐅𝐖 - 𝐑𝐞𝐚𝐥𝐢𝐬𝐭𝐢𝐜": " highly realistic, realistic portrait, (nsfw), anatomically correct, realistic photograph, real colors, award winning photo, detailed face, realistic eyes, beautiful, sharp focus, high resolution, volumetric lighting, incredibly detailed, masterpiece, breathtaking, exquisite, great attention to skin and eyes",
+"NSFW - Realistic": " highly realistic, realistic portrait, (nsfw), anatomically correct, realistic photograph, real colors, award winning photo, detailed face, realistic eyes, beautiful, sharp focus, high resolution, volumetric lighting, incredibly detailed, masterpiece, breathtaking, exquisite, great attention to skin and eyes",
 
-"𝐍𝐒𝐅𝐖 - 𝐀𝐧𝐢𝐦𝐞": " intricate detail, hyper-anime, trending on artstation, 8k, fluid motion, stunning shading, anime, highly detailed, realistic, (nsfw), dramatic lighting, beautiful, animation, sharp focus, award winning, masterpiece, cinematic, dynamic, cinematic lighting, breathtaking, exquisite, great attention to skin and eyes, exceptional, exemplary, unsurpassed, viral, popular, buzzworthy, up-and-coming, emerging, promising, acclaimed, premium",
+"NSFW - Anime": " intricate detail, hyper-anime, trending on artstation, 8k, fluid motion, stunning shading, anime, highly detailed, realistic, (nsfw), dramatic lighting, beautiful, animation, sharp focus, award winning, masterpiece, cinematic, dynamic, cinematic lighting, breathtaking, exquisite, great attention to skin and eyes, exceptional, exemplary, unsurpassed, viral, popular, buzzworthy, up-and-coming, emerging, promising, acclaimed, premium",
 
-"𝐍𝐒𝐅𝐖 - 𝐑𝐞𝐚𝐥𝐢𝐬𝐭𝐢𝐜 (Stronger)": "highly realistic, realistic portrait, (((nsfw))), anatomically correct, realistic photograph, real colors, award winning photo, detailed face, realistic eyes, beautiful, sharp focus, high resolution, volumetric lighting, incredibly detailed, masterpiece, breathtaking, exquisite, great attention to skin and eyes",
+"NSFW - Realistic (Stronger)": "highly realistic, realistic portrait, (((nsfw))), anatomically correct, realistic photograph, real colors, award winning photo, detailed face, realistic eyes, beautiful, sharp focus, high resolution, volumetric lighting, incredibly detailed, masterpiece, breathtaking, exquisite, great attention to skin and eyes",
 
-"𝐍𝐒𝐅𝐖 - 𝐀𝐧𝐢𝐦𝐞 (Stronger)": " intricate detail, hyper-anime, trending on artstation, 8k, fluid motion, stunning shading, anime, highly detailed, realistic, (((nsfw))), dramatic lighting, beautiful, animation, sharp focus, award winning, masterpiece, cinematic, dynamic, cinematic lighting, breathtaking, exquisite, great attention to skin and eyes, exceptional, exemplary, unsurpassed, viral, popular, buzzworthy, up-and-coming, emerging, promising, acclaimed, premium",
+"NSFW - Anime (Stronger)": " intricate detail, hyper-anime, trending on artstation, 8k, fluid motion, stunning shading, anime, highly detailed, realistic, (((nsfw))), dramatic lighting, beautiful, animation, sharp focus, award winning, masterpiece, cinematic, dynamic, cinematic lighting, breathtaking, exquisite, great attention to skin and eyes, exceptional, exemplary, unsurpassed, viral, popular, buzzworthy, up-and-coming, emerging, promising, acclaimed, premium",
 
 "NSFW Painted Anime": "art by atey ghailan, painterly anime style at pixiv, art by kantoku, in art style of redjuice/necömi/rella/tiv pixiv collab, your name anime art style, masterpiece digital painting, exquisite lighting and composition, inspired by wlop art style, 8k, sharp, very detailed, high resolution, illustration ^2\n painterly anime artwork, [input.description], masterpiece, fine details, breathtaking artwork, painterly art style, high quality, 8k, very detailed, high resolution, exquisite composition and lighting, ((NSFW))",
 
@@ -352,10 +352,10 @@ scheduler_choices = list(SCHEDULER_MAP.keys())
 secondary_style_choices = ["None"] + list(SECONDARY_STYLE_MAP.keys())
 
 with gr.Blocks(css=cyberpunk_css) as demo:
-    gr.Markdown("# Perchance Revival", elem_id="main_title")
+    gr.Markdown("# StormForgeAI Old Perchance Revival", elem_id="main_title")
 
     with gr.Row():
-        model_dropdown = gr.Dropdown(choices=model_choices, value=initial_default_model, label="Select Style", interactive=bool(styled_models), scale=3)
+        model_dropdown = gr.Dropdown(choices=model_choices, value=initial_default_model, label="Select Style (Model)", interactive=bool(styled_models), scale=3)
         secondary_style_dropdown = gr.Dropdown(choices=secondary_style_choices, value="None", label="Secondary Style (optional)", interactive=True, scale=2)
         device_dropdown = gr.Dropdown(choices=AVAILABLE_DEVICES, value=DEFAULT_DEVICE, label="Processing Device", interactive=len(AVAILABLE_DEVICES) > 1, scale=1)
 

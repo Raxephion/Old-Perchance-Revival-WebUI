@@ -31,7 +31,7 @@ This is the biggest update yet, adding a whole new way to create!
     
 *   **UI/UX Improvements:** The UI is now organized with clear tabs, and the image gallery thumbnails are smaller to save screen space.
 
-*   **Secondary Style dropdown selection.
+*   Secondary Style dropdown selection with presets
     
 
 #### Previous Updates

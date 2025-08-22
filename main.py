@@ -5,7 +5,7 @@ Created on Wed Sep 18 2024
 @author: raxephion
 Perchance Revival - Recreating Old Perchance SD 1.5 Experience
 Basic Stable Diffusion 1.5 Gradio App with local/Hub models and CPU/GPU selection
-Added multi-image generation, Hires. fix, Image-to-Image, and Secondary Styles.
+Added multi-image generation, Hires. fix, Image-to-Image, and Secondary Styles with Perchance syntax parsing.
 Models from STYLE_MODEL_MAP (if Hub IDs) will now be downloaded to MODELS_DIR.
 
 NOTE: App still in early development - UI will be adjusted to match Perchance presets
@@ -21,6 +21,7 @@ from PIL import Image
 import time # Optional: for timing generation
 import random # Needed for random seed
 import numpy as np # Needed for MAX_SEED, even if not used directly with gr.Number(-1) input
+import re # --- NEW: Import for regular expressions (parsing) ---
 # from huggingface_hub import HfFolder # Uncomment if you need to check for HF token
 
 # --- Configuration ---
@@ -51,7 +52,7 @@ STYLE_MODEL_MAP = {
     "CyberRealistic" : "OmegaSunset/CyberRrealisticSD15_Diffusers"
 }
 
-# --- NEW: Secondary Style Prompt Snippets ---
+# --- Secondary Style Prompt Snippets ---
 SECONDARY_STYLE_MAP = {
     "Painted Anime":"(((painted anime)))",
     "Casual Photo":"((((casual selfie)))), ((((casual photo)))), ((((photorealism))))",
@@ -91,6 +92,26 @@ DEFAULT_DEVICE = "GPU" if "GPU" in AVAILABLE_DEVICES else "CPU"
 current_pipeline = None
 current_model_id_loaded = None
 current_device_loaded = None
+
+# --- NEW: Helper function to parse Perchance-style syntax ---
+def parse_perchance_syntax(prompt_text):
+    """
+    Finds and replaces Perchance-style {a|b|c} syntax with a random choice.
+    This function loops to handle nested syntax correctly.
+    """
+    pattern = re.compile(r'{([^{}]+?)}')
+    while True:
+        match = pattern.search(prompt_text)
+        if not match:
+            break
+        
+        options_str = match.group(1)
+        choices = [choice.strip() for choice in options_str.split('|')]
+        selected_choice = random.choice(choices)
+        
+        prompt_text = prompt_text[:match.start()] + selected_choice + prompt_text[match.end():]
+        
+    return prompt_text
 
 # --- Model Loading Helper Function ---
 def load_model(model_input_name, selected_device_str):
@@ -132,12 +153,15 @@ def generate_image_from_text(model_input_name, selected_device_str, secondary_st
     if not prompt:
         raise gr.Error("Please enter a prompt.")
 
-    # --- Append secondary style if selected ---
     if secondary_style_name and secondary_style_name != "None":
         style_prompt = SECONDARY_STYLE_MAP.get(secondary_style_name, "")
         if style_prompt:
             prompt = f"{prompt}, {style_prompt}"
             print(f"Appended secondary style '{secondary_style_name}'.")
+
+    # --- MODIFIED: Parse the final prompt for Perchance syntax ---
+    prompt = parse_perchance_syntax(prompt)
+    print(f"Final Parsed Prompt: {prompt}")
 
     device_to_use = load_model(model_input_name, selected_device_str)
     
@@ -196,12 +220,15 @@ def generate_image_from_image(model_input_name, selected_device_str, secondary_s
     if input_image is None:
         raise gr.Error("Please upload an input image for Image-to-Image generation.")
 
-    # --- Append secondary style if selected ---
     if secondary_style_name and secondary_style_name != "None":
         style_prompt = SECONDARY_STYLE_MAP.get(secondary_style_name, "")
         if style_prompt:
             prompt = f"{prompt}, {style_prompt}"
             print(f"Appended secondary style '{secondary_style_name}'.")
+
+    # --- MODIFIED: Parse the final prompt for Perchance syntax ---
+    prompt = parse_perchance_syntax(prompt)
+    print(f"Final Parsed Prompt: {prompt}")
 
     device_to_use = load_model(model_input_name, selected_device_str)
     
@@ -217,7 +244,6 @@ def generate_image_from_image(model_input_name, selected_device_str, secondary_s
     num_images_int = int(num_images)
     print(f"Generating {num_images_int} image(s) from image with seed {seed_int}...")
     
-    # Convert Gradio's numpy array input to a PIL Image
     input_image_pil = Image.fromarray(input_image).convert("RGB")
     
     start_time = time.time()
@@ -262,26 +288,15 @@ styled_models = list(STYLE_MODEL_MAP.keys())
 model_choices = styled_models if styled_models else ["No models found"]
 initial_default_model = model_choices[0]
 scheduler_choices = list(SCHEDULER_MAP.keys())
-secondary_style_choices = ["None"] + list(SECONDARY_STYLE_MAP.keys()) # Choices for the new dropdown
+secondary_style_choices = ["None"] + list(SECONDARY_STYLE_MAP.keys())
 
 with gr.Blocks(css=cyberpunk_css) as demo:
     gr.Markdown("# Perchance Revival", elem_id="main_title")
 
-    # --- SHARED CONTROLS (OUTSIDE TABS) ---
     with gr.Row():
-        model_dropdown = gr.Dropdown(
-            choices=model_choices, value=initial_default_model, label="Select Style",
-            interactive=bool(styled_models), scale=3
-        )
-        # --- NEW Secondary Style Dropdown ---
-        secondary_style_dropdown = gr.Dropdown(
-            choices=secondary_style_choices, value="None", label="Secondary Style (optional)",
-            interactive=True, scale=2
-        )
-        device_dropdown = gr.Dropdown(
-            choices=AVAILABLE_DEVICES, value=DEFAULT_DEVICE, label="Processing Device",
-            interactive=len(AVAILABLE_DEVICES) > 1, scale=1
-        )
+        model_dropdown = gr.Dropdown(choices=model_choices, value=initial_default_model, label="Select Style", interactive=bool(styled_models), scale=3)
+        secondary_style_dropdown = gr.Dropdown(choices=secondary_style_choices, value="None", label="Secondary Style (optional)", interactive=True, scale=2)
+        device_dropdown = gr.Dropdown(choices=AVAILABLE_DEVICES, value=DEFAULT_DEVICE, label="Processing Device", interactive=len(AVAILABLE_DEVICES) > 1, scale=1)
 
     with gr.Tabs():
         # --- TEXT-TO-IMAGE TAB ---
@@ -291,7 +306,6 @@ with gr.Blocks(css=cyberpunk_css) as demo:
                     prompt_input = gr.Textbox(label="Positive Prompt", placeholder="Enter your prompt...", lines=3)
                     negative_prompt_input = gr.Textbox(label="Negative Prompt", placeholder="e.g. blurry, bad quality...", lines=2)
                     generate_button_txt2img = gr.Button("Generate", variant="primary")
-
                     with gr.Accordion("Advanced Settings", open=False):
                         steps_slider = gr.Slider(minimum=5, maximum=150, value=30, label="Inference Steps", step=1)
                         cfg_slider = gr.Slider(minimum=1.0, maximum=30.0, value=7.5, label="CFG Scale", step=0.1)
@@ -299,12 +313,10 @@ with gr.Blocks(css=cyberpunk_css) as demo:
                         size_dropdown = gr.Dropdown(choices=SUPPORTED_SD15_SIZES, value="512x768", label="Image Size")
                         seed_input = gr.Number(label="Seed (-1 for random)", value=-1, precision=0)
                         num_images_slider = gr.Slider(minimum=1, maximum=12, value=1, step=1, label="Number of Images")
-
                     with gr.Accordion("Hires. fix", open=False):
                         hires_fix_enable_checkbox = gr.Checkbox(label="Enable Hires. fix", value=False)
                         denoising_strength_slider = gr.Slider(minimum=0.0, maximum=1.0, value=0.7, step=0.01, label="Denoising Strength")
                         upscale_by_slider = gr.Slider(minimum=1.0, maximum=2.0, value=1.5, step=0.05, label="Upscale by")
-
                 with gr.Column(scale=3):
                     output_gallery_txt2img = gr.Gallery(label="Generated Images", show_label=True, interactive=False, format="png", columns=4, object_fit="contain")
                     actual_seed_output_txt2img = gr.Number(label="Actual Seed Used", precision=0, interactive=False)
@@ -315,18 +327,15 @@ with gr.Blocks(css=cyberpunk_css) as demo:
                 with gr.Column(scale=2):
                     input_image_img2img = gr.Image(type="numpy", label="Input Image")
                     strength_slider_img2img = gr.Slider(minimum=0.0, maximum=1.0, value=0.75, label="Strength", info="How much noise to add to the input image (0.0 preserves original, 1.0 is very creative)")
-
                     prompt_input_img2img = gr.Textbox(label="Positive Prompt", placeholder="Describe what you want to see...", lines=3)
                     negative_prompt_input_img2img = gr.Textbox(label="Negative Prompt", placeholder="e.g. blurry, bad quality...", lines=2)
                     generate_button_img2img = gr.Button(" Generate from Image ", variant="primary")
-
                     with gr.Accordion("Advanced Settings", open=False):
                         steps_slider_img2img = gr.Slider(minimum=5, maximum=150, value=30, label="Inference Steps", step=1)
                         cfg_slider_img2img = gr.Slider(minimum=1.0, maximum=30.0, value=7.5, label="CFG Scale", step=0.1)
                         scheduler_dropdown_img2img = gr.Dropdown(choices=scheduler_choices, value=DEFAULT_SCHEDULER, label="Scheduler")
                         seed_input_img2img = gr.Number(label="Seed (-1 for random)", value=-1, precision=0)
                         num_images_slider_img2img = gr.Slider(minimum=1, maximum=9, value=1, step=1, label="Number of Images")
-                
                 with gr.Column(scale=3):
                     output_gallery_img2img = gr.Gallery(label="Generated Images", show_label=True, interactive=False, format="png", columns=4, object_fit="contain")
                     actual_seed_output_img2img = gr.Number(label="Actual Seed Used", precision=0, interactive=False)
@@ -334,23 +343,12 @@ with gr.Blocks(css=cyberpunk_css) as demo:
     # --- Define Button Clicks ---
     generate_button_txt2img.click(
         fn=generate_image_from_text,
-        inputs=[
-            model_dropdown, device_dropdown, secondary_style_dropdown, prompt_input, negative_prompt_input,
-            steps_slider, cfg_slider, scheduler_dropdown, size_dropdown,
-            seed_input, num_images_slider,
-            hires_fix_enable_checkbox, denoising_strength_slider, upscale_by_slider
-        ],
+        inputs=[model_dropdown, device_dropdown, secondary_style_dropdown, prompt_input, negative_prompt_input, steps_slider, cfg_slider, scheduler_dropdown, size_dropdown, seed_input, num_images_slider, hires_fix_enable_checkbox, denoising_strength_slider, upscale_by_slider],
         outputs=[output_gallery_txt2img, actual_seed_output_txt2img]
     )
-
     generate_button_img2img.click(
         fn=generate_image_from_image,
-        inputs=[
-            model_dropdown, device_dropdown, secondary_style_dropdown, input_image_img2img, prompt_input_img2img, 
-            negative_prompt_input_img2img, strength_slider_img2img, steps_slider_img2img, 
-            cfg_slider_img2img, scheduler_dropdown_img2img, seed_input_img2img, 
-            num_images_slider_img2img
-        ],
+        inputs=[model_dropdown, device_dropdown, secondary_style_dropdown, input_image_img2img, prompt_input_img2img, negative_prompt_input_img2img, strength_slider_img2img, steps_slider_img2img, cfg_slider_img2img, scheduler_dropdown_img2img, seed_input_img2img, num_images_slider_img2img],
         outputs=[output_gallery_img2img, actual_seed_output_img2img]
     )
     

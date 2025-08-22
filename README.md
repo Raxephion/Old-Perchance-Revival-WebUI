@@ -19,95 +19,88 @@ This project is primarily designed for **Windows** users, offering a straightf
 ✨ What's New in This Version?
 -----------------------------
 
-This latest release focuses on adding powerful new features and improving your quality of life!
+This is the biggest update yet, adding a whole new way to create!
 
-*   Introducing Image-to-Image (img2img)! This is a game-changer. A whole new tab has been added that lets you upload your own images and transform them with a prompt. Turn your doodles into masterpieces, change the style of a photo, or modify existing AI art. (See the full guide below!)
-
-*   **Dedicated Hires. fix Section:** The most exciting new feature! You can now upscale and add significant detail to your creations with a simple, dedicated dropdown menu. (See the full guide on how to use it below!)
+*   **Introducing Image-to-Image (img2img)!** A whole new tab has been added that lets you upload your own images and transform them with a prompt. Turn your doodles into masterpieces, change the style of a photo, or modify existing AI art.
     
-*   **Increased Image Count:** You can now generate up to **9 images** in a single batch, making it easier to find that perfect result.
+*   **Dedicated Hires. fix Section:** Upscale and add significant detail to your creations with a simple, dedicated dropdown menu in the Text-to-Image tab.
     
-*   **Lossless PNG Output:** Images now save in **PNG format** by default for the best possible quality, with no compression artifacts.
+*   **Increased Image Count:** You can now generate up to **9 images** in a single batch.
     
-*   **UI/UX Improvements:** The 'Generate' button has been moved to a more logical spot, right below the prompts, so you can access it without scrolling. The image gallery thumbnails are also smaller, allowing you to see more of your creations at once without cluttering the screen.
+*   **Lossless PNG Output:** Images now save in **PNG format** by default.
+    
+*   **UI/UX Improvements:** The UI is now organized with clear tabs, and the image gallery thumbnails are smaller to save screen space.
     
 
 #### Previous Updates
 
-*   **✨ 01/08/2025:** Managed to track down more perchance models, presets and system prompts. After being emailed by people using this app, and seeing there actually IS interest, I will up the momentum again with this. Pity about the toxicity on Reddit, but as long as the interest remains, this shall remain in active development.
+*   **✨ 01/08/2025:** More Perchance models and prompts tracked down. Development momentum is back!
     
 *   **✨ 11/07/2025:** New realistic model - **CyberRealistic** - added.
     
-*   **✨ 11/06/2025:** Enhanced Portability & Local Model Caching! All models are now downloaded and cached into the local checkpoints folder, making the app fully portable.
+*   **✨ 11/06/2025:** Enhanced Portability & Local Model Caching!
     
-*   **Email model suggestions to:** [_raxephion@yahoo.com_](https://www.google.com/url?sa=E&q=mailto:raxephion@yahoo.com) (models you think might have been used by perchance and/or models you'd like to see in the app).
-    
-
-> ⚠️ **Early Development Notice**This app is still in **very early development**. It can already generate images successfully, but expect bugs, missing polish, and future changes. It’s functional but **not production-ready yet**.
-
-How to Use the New Hires. fix Feature
--------------------------------------
-
-Standard AI images can sometimes look a bit soft or lack fine detail at their base size (like 512x768). **Hires. fix** is a powerful feature that solves this by performing a two-step process to create larger, more detailed final images.
-
-1.  It generates your image at the normal, smaller size you selected.
-    
-2.  It then intelligently enlarges that image and **paints over it** with more detail, using your original prompt as a guide.
+*   **Email model suggestions to:** [_raxephion@yahoo.com_](https://www.google.com/url?sa=E&q=mailto:raxephion@yahoo.com).
     
 
-The result is a high-resolution image that retains the composition you liked from the smaller version.
+> ⚠️ **Early Development Notice**This app is still in **very early development**. It can already generate images successfully, but expect bugs and future changes.
 
-#### Simple Steps to Use Hires. fix:
+How to Use the Image-to-Image (img2img) Tab
+-------------------------------------------
 
-1.  **Generate Your Base Image First:** Write your prompt and set your normal settings (steps, CFG, size) as you usually would. It's often a good idea to find a seed you like _before_ enabling Hires. fix. This saves you from wasting time upscaling an image you don't like.
+Image-to-Image is a powerful way to use one of your own pictures as a starting point for a new creation.
+
+1.  **Click the 'Image-to-Image' Tab:** Select the tab at the top of the interface.
     
-2.  **Open the 'Hires. fix' Menu:** Click on the dropdown menu labeled **'Hires. fix'** located below the Advanced Settings.
+2.  **Upload Your Image:** Drag and drop an image into the "Input Image" box.
     
-3.  **Enable It:** Tick the **'Enable Hires. fix'** checkbox.
+3.  **Write a Prompt:** Describe what you want the _**final**_ image to look like.
     
-4.  **Configure the Settings:**
+4.  **Set the 'Strength' Slider:** This is the most important setting! It tells the AI how much to change your original image. A low strength (_0.1_ - _0.4_) makes small changes, while a high strength (_0.8_+) will only use your image as loose inspiration. A medium value is a great place to start.
     
-    *   **Upscale by:** This slider controls how much bigger the final image will be. A value of _1.5_ will make a 512x512 image into a 768x768 image. A value of _2.0_ will double it to 1024x1024.
-        
-    *   **Denoising strength:** Think of this as a "creativity vs. faithfulness" slider for the second step.
-        
-        *   A **lower value** (e.g., _0.5_) will stick very closely to your original image's composition and colors, just adding finer detail.
-            
-        *   A **higher value** (e.g., _0.75_) gives the AI more freedom to change things and add new elements while it adds detail. This can sometimes lead to better results, but may also alter your image more than you want. A good starting point is usually around **0.6-0.7**.
-            
-5.  **Click Generate!** Your PC will now perform both steps. Be patient, as this will take longer than a normal generation.
+5.  **Generate!** Click **'Generate from Image'** and see what you get!
     
 
-> **Important Note:** Hires. fix uses more of your computer's resources (VRAM) and takes longer because it's essentially doing twice the work. If you get an 'Out of Memory' error, try using a smaller 'Upscale by' value.
+How to Use Hires. fix (in Text-to-Image)
+----------------------------------------
+
+**Hires. fix** is a feature in the Text-to-Image tab that creates larger, more detailed images by generating a small image first and then intelligently upscaling it.
+
+*   **To use it:** First, find a seed you like with your base settings. Then, open the **'Hires. fix'** menu, tick the checkbox to enable it, and adjust the **'Upscale by'** and **'Denoising strength'** sliders. Click generate again for a high-resolution result.
+    
+
+> **CPU Users Please Note:** Hires. fix is _very_ computationally intensive. It will be **extremely slow** on CPU-only systems. It is strongly recommended to only use this feature if you have a compatible GPU.
 
 ✨ Features
 ----------
 
-*   **Device Agnostic:**
+*   **Text-to-Image Mode:** Generate art from a simple text description.
     
-    *   Run inference on your **CPU**.
-        
-    *   Leverage your **NVIDIA GPU** for significantly faster generation.
-        
-*   **Comprehensive Control:**
+*   **Image-to-Image Mode:** Upload your own image and transform it with a prompt.
     
-    *   **Positive & Negative Prompts:** Guide the AI with detailed descriptions.
-        
-    *   **Inference Steps & CFG Scale:** Control image generation quality and prompt adherence.
-        
-    *   **Schedulers:** Experiment with different sampling algorithms (Euler, DPM++ 2M, DDPM, LMS).
-        
-    *   **Image Sizes:** Choose from standard SD1.5 resolutions.
-        
-    *   **Seed Control:** Set a specific seed for reproducible results or use -1 for a random one.
-        
-*   **User-Friendly Interface:**
+*   **Device Agnostic:** Run on your **CPU** or leverage your **NVIDIA GPU** for faster generation.
     
-    *   Clean and intuitive Gradio UI with organized controls.
-        
-    *   Direct image display with download and share options.
-        
+*   **Comprehensive Control:** Full control over prompts, steps, CFG scale, schedulers, and seeds.
+    
+*   **User-Friendly Interface:** A clean UI with organized tabs and controls.
+    
 *   **Safety First (Note):** The built-in safety checker is **disabled** to allow for maximum creative freedom. Please use responsibly.
+    
+
+⚡ Tips for CPU Users (Getting More Speed)
+-----------------------------------------
+
+Generating images on a CPU will always be slower than on a GPU, but you can significantly speed up the process by changing a few settings. If you find the wait times are too long, try these tips:
+
+*   **Avoid Hires. fix:** As mentioned above, this feature performs a second, intensive pass and will drastically increase generation time on a CPU. It's best left disabled.
+    
+*   **Lower the Inference Steps:** The default is 30, but you can get surprisingly good results with fewer steps. Try starting with **15 steps**. With some models and schedulers, you can even get decent images at **10 steps**.
+    
+*   **Use a Fast Scheduler:** The **Euler** scheduler is generally one of the fastest available. Sticking with it is a good way to keep times down.
+    
+*   **Start with Smaller Images:** Generating a 512x512 image will be much faster than generating a 768x1024 one.
+    
+*   **Experiment!** The key is to find a balance between speed and quality that you are happy with. Try generating the same prompt with 10, 15, and 20 steps to see how much of a difference it makes for both the image quality and your wait time.
     
 
 🚀 Prerequisites
@@ -129,57 +122,43 @@ The result is a high-resolution image that retains the composition you liked fro
 📦 Easy Setup (Windows - Download & Run)
 ----------------------------------------
 
-This is the recommended and easiest method for most Windows users.
-
-1.  **Download the project:**
+1.  **Download:** Go to the GitHub page, click the green **< > Code** button, and select **"Download ZIP"**.
     
-    *   Go to the GitHub repository page.
-        
-    *   Click the green **< > Code** button and select **"Download ZIP"**.
-        
-2.  **Extract the ZIP:** Extract the file to a location on your computer (e.g., your Desktop).
+2.  **Extract:** Extract the file to a location on your computer.
     
-3.  **Choose Your Setup Script:**
+3.  **Setup:** Run _setup-CPU.bat_ for CPU or _setup-GPU.bat_ for GPU.
     
-    *   For **CPU** Inference: Run _setup-CPU.bat_.
-        
-    *   For **GPU** Inference: Run _setup-GPU.bat_.
-        
-4.  **Run the Setup Script:**
+4.  **Wait:** A command prompt will open and install everything. Please be patient.
     
-    *   **Double-click the script you chose**. A command prompt window will open and automatically install everything you need. Please be patient, as this can take some time.
-        
 
 🔄 Updating the Application (Windows - Easy Method)
 ---------------------------------------------------
 
-To get the latest features, simply double-click **update.bat** in the project folder. It will automatically download the latest changes for you.
+To get the latest features, simply double-click **update.bat** in the project folder.
 
 ▶️ Running the Application (Windows - Easy Method)
 --------------------------------------------------
 
-Once setup is complete, just double-click the **run.bat** file. A command prompt will appear, and a browser window should automatically open with the app. If not, open the URL shown in the console (usually _http://127.0.0.1:7860_).
+Once setup is complete, just double-click the **run.bat** file. A browser window should automatically open with the app.
 
 ⚙️ Manual Setup (For Linux/macOS or Advanced Users)
 ---------------------------------------------------
 
-If you are not on Windows or prefer a manual approach:
-
-1.  **Clone the Repository:**Open your terminal, navigate to where you want the project, and run the command: _git clone https://github.com/Raxephion/Old-Perchance-Revival-WebUI.git_. Then, navigate into the new folder with: _cd Old-Perchance-Revival-WebUI_.
+1.  **Clone:** Run _git clone https://github.com/Raxephion/Old-Perchance-Revival-WebUI.git_ and then _cd Old-Perchance-Revival-WebUI_.
     
-2.  **Create and Activate a Virtual Environment:**First, run _python -m venv venv_.To activate it on Windows, run _venv\\Scripts\\activate_. On Linux/macOS, run _source venv/bin/activate_.
+2.  **Create Environment:** Run _python -m venv venv_. Then activate it (_venv\\Scripts\\activate_ on Windows, _source venv/bin/activate_ on Linux/macOS).
     
-3.  **Install Dependencies:**Run the command: _pip install -r requirements.txt_.
+3.  **Install Dependencies:** Run _pip install -r requirements.txt_.
     
-4.  **Install PyTorch:** Find the correct command for your specific system (CPU or a certain CUDA version) at the official **PyTorch website**.
+4.  **Install PyTorch:** Find the correct command for your system at the **PyTorch website**.
     
-5.  **Run the Application:**With your virtual environment still active, run: _python main.py_.
+5.  **Run:** Run _python main.py_.
     
 
 ⚙️ Uninstall:
 -------------
 
-*   Simply **delete the project folder**. This app is completely portable and doesn't install anything outside its own directory.
+*   Simply **delete the project folder**. This app is completely portable.
     
 
 📄 License

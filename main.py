@@ -54,21 +54,82 @@ STYLE_MODEL_MAP = {
 
 # --- Secondary Style Prompt Snippets ---
 SECONDARY_STYLE_MAP = {
-    "Painted Anime":"(((painted anime)))",
-    "Casual Photo":"((((casual selfie)))), ((((casual photo)))), ((((photorealism))))",
-    "Realistic Humans":"((((realism)))), ((((photorealism)))), ((((ultra detailed)))), ((((lifelike)))), in soft gaze, looking straight at the camera, skin blemishes, imperfect skin, skin pores, no makeup, no cosmetics, matured, solo, centered, RAW photo, detailed, clear features, sharp focus, film grain, 8k uhd, candid portrait, natural lighting",
-    "Jester":"(((jester laughing maniacally anime art style))) (((jester anime art style))) (((pointy jester hat anime art style))) (((yugioh anime art style))) (((neon colors))) (((vibrant colors))) (((bright colors))) (((lens flare))) (((light leaks))) (((long exposure)))",
-    "Ninja": "(((( one character, ninja gaiden anime art style, ninja scroll anime art style, martial arts anime art style, 3D anime art style, heavy outlines art style, light leaks, lens flare, long exposure))))",
-    "Final Fantasy": "(Final Fantasy Art Style:1.3), (CGI Video Game Art Style:1.3), (3D Video Game Art Style:1.3), (light leaks:1.1), (lens flare:1.1)",
-    "Star Wars Character": "(((one character:1.5))),(Star Wars Art Style:1.3), (Animated Star Wars Art style:1.3), (Star Wars Anime Art style:1.3), (Anime Art style:1.3), (bright color grading:1.2), (vibrant color grading:1.2), (light leaks), (lens flare)",
-    "Dragonball":" (Dragonball Anime Art Style:1.1), (YuGiOh art style:1.3), (bright color grading:1.2), (vibrant color grading:1.2), (light leaks), (lens flare)",
-    "Neko (Catgirl)": "(((one character:1.5))), (human catgirl with a cat tail anime art style:1.3), (waifu anime art style:1.3), (gorgeous anime art style:1.3), (yugioh art style:1.3), (2d disney character art style:1.1), (catgirl anime art style:1.3), (neko anime art style:1.3), (vibrant color grading:1.6), (bright color grading:1.6), adult female catgirl, perfect body, {dark|light|medium} skin complexion, pretty lips, pretty eyes, light makeup, ({character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld} shot}:1.3)",
-    "American Girl": "(((one character:1.5))), (perfect gorgeous anime art style:1.3), (yugioh art style:1.3), (2d disney character art style:1.3), (gen13 comic art style), (stormwatch comic art style), tall adult female in her early 20s, perfect body, {dark|light|medium} skin complexion, smooth skin, american face, pretty lips, pretty eyes, light makeup, wearing {jeans|short shorts|a revealing outfit|a skin-tight bodysuit|a punk rock outfit|a steampunk outfit|a college cheerleader uniform|a skater girl outfit|a swimsuit|a bikini|underwear and a t-shirt with no bra|fancy underwear|a minidress with stockings|a miniskirt with stockings|leggings}:1.2, (view from {the front|behind}), ({character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld} shot}:1.3)",
-    "Random Girl 1": " one character, female in her early 20s, {dark|light|medium} skin complexion, smooth skin, american face, {dark|light|medium} {blue|green|gray|hazel|brown} eyes, pretty lips, pretty eyes, light makeup, abstract halftone background, thick border around image, vibrant colors, bright colors, high contrast, {amazingly beautiful|embodiment of perfection|stunningly gorgeous} girl anime art style",
-    "Random Girl 2": "one character, female in her early 20s, {dark|light|medium} skin complexion, smooth skin, american face, {dark|light|medium} {blue|green|gray|hazel|brown} eyes, pretty lips, pretty eyes, light makeup, wearing {jeans|short shorts|a revealing outfit|a skin-tight bodysuit|a punk rock outfit|a steampunk outfit|a college cheerleader uniform|a skater girl outfit|a swimsuit|a bikini|underwear and a t-shirt|fancy underwear|a minidress with stockings|a miniskirt with stockings|leggings}, view from {the front|behind, rear projection}, {character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld|pov} shot|pov shot}, abstract halftone background, thick border around image, vibrant colors, bright colors, high contrast, {amazingly beautiful|embodiment of perfection|stunningly gorgeous} girl anime art style",
-    "Lego": "(legos art style:1.3), (lego video game art style:1.3)",
-    "Oil Painting": "((((oil painting)))), ((((painterly))))",
-    "Drawn Anime": "((((hand drawn anime)))), ((((illustration))))"
+    "MTG Card": "magic the gathering",
+
+"Realistic images": "high quality image, 4k, 8k, HD, UHD, Sharp Focus, In Frame",
+
+"Realistic humans": "high quality image, 4k, 8k, HD, UHD",
+
+"𝗡𝗼 𝘀𝘁𝘆𝗹𝗲": "",
+
+"Anti-NSFW": "SFW",
+
+"League of Legends": "fyptt.toconcept art, digital art, illustration, (league of legends style concept art), inspired by wlop style, 8k, fine details, sharp, very detailed, high resolution,anime, (realistic) ,magic the gathering, colorful background, no watermark,wallpaper, normal eyes",
+
+"Jester": "(((jester laughing maniacally anime art style))) (((jester anime art style))) (((pointy jester hat anime art style))) (((yugioh anime art style))) (((neon colors))) (((vibrant colors))) (((bright colors))) (((lens flare))) (((light leaks))) (((long exposure)))",
+
+"Ninja": "one character, ninja gaiden anime art style, ninja scroll anime art style, martial arts anime art style, 3D anime art style, heavy outlines art style, light leaks, lens flare, long exposure",
+
+"Random Girl 1": "one character, female in her early 20s, {dark|light|medium} skin complexion, smooth skin, american face, {dark|light|medium} {blue|green|gray|hazel|brown} eyes, pretty lips, pretty eyes, light makeup, abstract halftone background, thick border around image, vibrant colors, bright colors, high contrast, {amazingly beautiful|embodiment of perfection|stunningly gorgeous} girl anime art style",
+
+"Random Girl 2": "one character, female in her early 20s, {dark|light|medium} skin complexion, smooth skin, american face, {dark|light|medium} {blue|green|gray|hazel|brown} eyes, pretty lips, pretty eyes, light makeup, wearing {jeans|short shorts|a revealing outfit|a skin-tight bodysuit|a punk rock outfit|a steampunk outfit|a college cheerleader uniform|a skater girl outfit|a swimsuit|a bikini|underwear and a t-shirt|fancy underwear|a minidress with stockings|a miniskirt with stockings|leggings}, view from {the front|behind, rear projection}, {character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld|pov} shot|pov shot}, abstract halftone background, thick border around image, vibrant colors, bright colors, high contrast, {amazingly beautiful|embodiment of perfection|stunningly gorgeous} girl anime art style",
+
+"Lego": "(legos art style:1.3), (lego video game art style:1.3)",
+
+"Skittles": "(skittles art style:1.3), (taste the rainbow art style:1.3), skittles, tropical skittles, sour skittles, neon color grading, bright color grading, vibrant color grading, light leaks, lens flare, long exposure",
+
+"Webcore": "(bold colors made in MS Paint and retro graphic design art style:1.3), (pixel art style:1.3), (neon color grading:1.2)",
+
+"Terraria": "(Terrarria Art Style:1.3), (Pixel Art Style:1.3), (Vibrant Color Grading:1.3)",
+
+"Final Fantasy": "(Final Fantasy Art Style:1.3), (CGI Video Game Art Style:1.3), (3D Video Game Art Style:1.3), (light leaks:1.1), (lens flare:1.1)",
+
+"Star Wars Character": "(((one character:1.5))),(Star Wars Art Style:1.3), (Animated Star Wars Art style:1.3), (Star Wars Anime Art style:1.3), (Anime Art style:1.3), (bright color grading:1.2), (vibrant color grading:1.2), (light leaks), (lens flare)",
+
+"Star Wars Battle": "(((epic space battle:1.5))),(Star Wars Space Battle Art Style:1.3), (Animated Star Wars Art style:1.3), (Space Battle Anime Art style:1.3), (Anime Art style:1.3), (Starship Battle Art Style:1.3), (bright color grading:1.2), (vibrant color grading:1.2), (light leaks), (lens flare)",
+
+"Dragonball": "(Dragonball Anime Art Style:1.1), (YuGiOh art style:1.3), (bright color grading:1.2), (vibrant color grading:1.2), (light leaks), (lens flare)",
+
+"Undertale": "(Undertale Anime Art Style:1.3)",
+
+
+"ENA": " (AND NEW GAME created by Peruvian animator Joel Guerra art style:1.3), (Surrealist crossed with Late 90s and Early 2000s Computer software and obscure console gaming imagery art style:1.3), (bright color grading:1.2)",
+
+"Neko (Catgirl)": "(((one character:1.5))), (human catgirl with a cat tail anime art style:1.3), (waifu anime art style:1.3), (gorgeous anime art style:1.3), (yugioh art style:1.3), (2d disney character art style:1.1), (catgirl anime art style:1.3), (neko anime art style:1.3), (vibrant color grading:1.6), (bright color grading:1.6), adult female catgirl, perfect body, {dark|light|medium} skin complexion, pretty lips, pretty eyes, light makeup, ({character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld} shot}:1.3)",
+
+"American Girl": "(((one character:1.5))), (perfect gorgeous anime art style:1.3), (yugioh art style:1.3), (2d disney character art style:1.3), (gen13 comic art style), (stormwatch comic art style), tall adult female in her early 20s, perfect body, {dark|light|medium} skin complexion, smooth skin, american face, pretty lips, pretty eyes, light makeup, wearing {jeans|short shorts|a revealing outfit|a skin-tight bodysuit|a punk rock outfit|a steampunk outfit|a college cheerleader uniform|a skater girl outfit|a swimsuit|a bikini|underwear and a t-shirt with no bra|fancy underwear|a minidress with stockings|a miniskirt with stockings|leggings}:1.2, (view from {the front|behind}), ({character portrait|{high-angle|low-angle|close up|over-the-shoulder|wide-angle|profile|full body|telephoto|panoramic|handheld} shot}:1.3)",
+
+"𝐍𝐒𝐅𝐖 - 𝐑𝐞𝐚𝐥𝐢𝐬𝐭𝐢𝐜": " highly realistic, realistic portrait, (nsfw), anatomically correct, realistic photograph, real colors, award winning photo, detailed face, realistic eyes, beautiful, sharp focus, high resolution, volumetric lighting, incredibly detailed, masterpiece, breathtaking, exquisite, great attention to skin and eyes",
+
+"𝐍𝐒𝐅𝐖 - 𝐀𝐧𝐢𝐦𝐞": " intricate detail, hyper-anime, trending on artstation, 8k, fluid motion, stunning shading, anime, highly detailed, realistic, (nsfw), dramatic lighting, beautiful, animation, sharp focus, award winning, masterpiece, cinematic, dynamic, cinematic lighting, breathtaking, exquisite, great attention to skin and eyes, exceptional, exemplary, unsurpassed, viral, popular, buzzworthy, up-and-coming, emerging, promising, acclaimed, premium",
+
+"𝐍𝐒𝐅𝐖 - 𝐑𝐞𝐚𝐥𝐢𝐬𝐭𝐢𝐜 (Stronger)": "highly realistic, realistic portrait, (((nsfw))), anatomically correct, realistic photograph, real colors, award winning photo, detailed face, realistic eyes, beautiful, sharp focus, high resolution, volumetric lighting, incredibly detailed, masterpiece, breathtaking, exquisite, great attention to skin and eyes",
+
+"𝐍𝐒𝐅𝐖 - 𝐀𝐧𝐢𝐦𝐞 (Stronger)": " intricate detail, hyper-anime, trending on artstation, 8k, fluid motion, stunning shading, anime, highly detailed, realistic, (((nsfw))), dramatic lighting, beautiful, animation, sharp focus, award winning, masterpiece, cinematic, dynamic, cinematic lighting, breathtaking, exquisite, great attention to skin and eyes, exceptional, exemplary, unsurpassed, viral, popular, buzzworthy, up-and-coming, emerging, promising, acclaimed, premium",
+
+"NSFW Painted Anime": "art by atey ghailan, painterly anime style at pixiv, art by kantoku, in art style of redjuice/necömi/rella/tiv pixiv collab, your name anime art style, masterpiece digital painting, exquisite lighting and composition, inspired by wlop art style, 8k, sharp, very detailed, high resolution, illustration ^2\n painterly anime artwork, [input.description], masterpiece, fine details, breathtaking artwork, painterly art style, high quality, 8k, very detailed, high resolution, exquisite composition and lighting, ((NSFW))",
+
+"Realistic Human Generator": "in soft gaze, looking straight at the camera, skin blemishes, imperfect skin, skin pores, no makeup, no cosmetics, matured, solo, centered, RAW photo, detailed, clear features, sharp focus, film grain, 8k uhd, candid portrait, natural lighting",
+
+"Teen": "(girl has babyface), ((first-year high-school)), (girl has flat chest), girl barely has boobs, girl is sooo adorable!!!, ((petite)), ((young)), teen, ((small boobs)), flat chest, tiny tits, (pink pussy), (young|virile|strong|chiseled|striking|nude|vagina|labia), shadowy, (shadows:1.3), (realistic vagina and labia), full body shot, torso, razor-sharp clarity, ultra-high resolution, photorealistic detail, natural color accuracy, perfectly balanced exposure, uncompromised texture fidelity, focus precision, real-world vibrancy, authentic ambient lighting, impeccable contrast levels, true-to-life saturation, crystal-clear sharpness, unaltered realness, fine-grained definition, optical purity, ambient light capture, shadow and highlight detail, unfiltered realism, (real:1.3), studio lighting, shiny skin, crazy bitch, real photograph, small, teen, teenager, young, (open skin:1.2), headshot, {nerdy glasses|Dental braces}, {Standing Straight|Crossed Legs|one Leg Forward|Hands on Hips|Leaning Against Something|Sitting Down|Kneeling|Lying Down|Back to Camera|Tiptoe Stand|Walking Pose|Jumping Pose|Action Pose|Arms Crossed|Hands in Pockets|Hand on Hip|Arms Above Head|Hands Together in Front|Reaching out|Playing with Hair|Touching Face|Holding an object|Prayer Position|Hands on Shoulders|Fingers to Lips|Waving|Looking over Shoulder|Tilting Head|Direct Gaze into Camera|Side Glance|Closed Eyes|Smiling|Serious Expression|Laughing|Blowing a Kiss|Winking|Eyes Wide open|Frowning|Surprised Look|one Foot Forward|Crossed at the Ankles|Bent Knee|Pointed Toes|Feet",
+
+"Style of 'Your Name'": "in the art style of Makoto Shinkai, beautiful detailed skies, cinematic lighting, vibrant colors, emotional and atmospheric",
+
+"Pokemon": "in the art style of Ken Sugimori, official Pokemon art, simple and bold outlines, vibrant and playful color palette, dynamic character poses",
+
+"Berserk anime style": "in the art style of Kentaro Miura, dark fantasy, intricate and detailed linework, heavy shading and cross-hatching, dramatic and gritty atmosphere, monochrome with muted tones",
+
+"Studio Ghibli": "in the style of Studio Ghibli and Hayao Miyazaki, whimsical and enchanting, lush hand-painted watercolor backgrounds, soft and nostalgic lighting, dreamlike fantasy",
+
+"Cuphead": "in the style of a 1930s rubber hose animation, vintage cartoon, hand-drawn aesthetic, surreal and whimsical characters, grainy and aged film look",
+
+"Psychedelic Art": "psychedelic style, vibrant swirling colors, abstract and surreal patterns, kaleidoscopic and fractal visuals, mind-bending and trippy",
+
+"Into the Spider-Verse": "comic book art style, ben-day dots, chromatic aberration, halftone patterns, dynamic and energetic composition, vibrant and saturated colors, graphic and stylized",
+
+"Vaporwave": "80s and 90s retro futurism, neon grids, pastel color palette (pinks, blues, purples), roman busts, glitch art, Japanese text, nostalgic and surreal",
+
+"Tim Burton Style": "gothic and whimsical, dark yet playful, spindly and exaggerated character designs, large expressive eyes, muted color palette with occasional bursts of color, twisted and fantastical"
 }
 
 DEFAULT_HUB_MODELS = [] # Keep empty as styles handle featured models

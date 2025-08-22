@@ -30,6 +30,8 @@ This is the biggest update yet, adding a whole new way to create!
 *   **Lossless PNG Output:** Images now save in **PNG format** by default.
     
 *   **UI/UX Improvements:** The UI is now organized with clear tabs, and the image gallery thumbnails are smaller to save screen space.
+
+*   **Secondary Style dropdown selection.
     
 
 #### Previous Updates

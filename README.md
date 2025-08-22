@@ -21,6 +21,8 @@ This project is primarily designed for **Windows** users, offering a straightf
 
 This latest release focuses on adding powerful new features and improving your quality of life!
 
+*   **Introducing Image-to-Image (img2img)! This is a game-changer. A whole new tab has been added that lets you upload your own images and transform them with a prompt. Turn your doodles into masterpieces, change the style of a photo, or modify existing AI art. (See the full guide below!)
+
 *   **Dedicated Hires. fix Section:** The most exciting new feature! You can now upscale and add significant detail to your creations with a simple, dedicated dropdown menu. (See the full guide on how to use it below!)
     
 *   **Increased Image Count:** You can now generate up to **9 images** in a single batch, making it easier to find that perfect result.

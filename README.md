@@ -175,3 +175,9 @@ Support:
 --------
 
 Feel free to buy me a coffee ;) [_https://ko-fi.com/raxephion_](https://www.google.com/url?sa=E&q=https://ko-fi.com/raxephion)
+
+## Disclaimer ⚠️
+----------------
+This project is open-source and free to use, modify, and even break.  
+But if it *does* break, please don’t come break me 😉 — use it at your own risk.  
+Contributions and bug reports are always welcome!

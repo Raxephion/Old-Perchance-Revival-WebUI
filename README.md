@@ -1,6 +1,11 @@
 Perchance Revival - Easy Local SD 1.5 Image Generation
 ======================================================
 
+✨ AMD and GTX Fix Packs available on discord: https://discord.gg/SYEvvnTt
+-----------------------------
+
+
+
 
 ![alt text](https://img.shields.io/badge/python-3.8+-blue.svg)   
 

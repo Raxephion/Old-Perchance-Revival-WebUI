@@ -1,7 +1,7 @@
 Perchance Revival - Easy Local SD 1.5 Image Generation
 ======================================================
 
-⚠️ Experimental & UNTESTED ⚠️ AMD and GTX Fix Packs available on discord⚠️: https://discord.gg/SYEvvnTt 
+⚠️ Experimental & UNTESTED ⚠️ AMD and GTX Fix Packs available on discord: https://discord.gg/SYEvvnTt 
 -----------------------------
 
 
